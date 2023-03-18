@@ -1,0 +1,48 @@
+version: "3"
+   
+services:
+      
+  dbbackend:
+    container_name: 'dbbackend'
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/db_backend:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres    
+
+  dbuserend:
+    container_name: 'dbuserend'
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/db_userend:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+           
+  webfrontend:
+    container_name: 'webfrontend-webapp'
+    restart: always
+    build: Frontend
+    command: python manage.py runserver 0.0.0.0:50300
+    
+  webbackend:
+    container_name: 'webappapi-webapp'
+    restart: always
+    build: Backend
+    command: python manage.py runserver 0.0.0.0:50200
+    depends_on:
+      - dbbackend
+          
+  webuserend:
+    container_name: 'webuserend'
+    restart: always
+    build: Userend
+    command: python manage.py runserver 0.0.0.0:50100
+    depends_on:
+      - dbuserend
+      

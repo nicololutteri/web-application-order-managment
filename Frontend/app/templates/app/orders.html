@@ -1,0 +1,95 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1>Orders</h1>
+
+<hr />
+
+<p>
+  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Add/Update
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <label id="ord_amountlabel">Quantity</label>
+    <input type="number" class="form-control" size="12" step="0.01" name="new_ord_amount" id="new_ord_amount" aria-labelledby="ord_amountlabel" />
+
+    <label id="ord_advance_amountlabel">Advance</label>
+    <input type="number" class="form-control" name="new_ord_advance_amount" step="0.01" id="new_ord_advance_amount" aria-labelledby="ord_advance_amountlabel" />
+
+    <label id="ord_datelabel">Date</label>
+    <input type="date" class="form-control" name="new_ord_ord_date" id="new_ord_ord_date" aria-labelledby="ord_datelabel" />
+
+    <label id="ord_cust_codelabel">Client code</label>
+    <input type="text" class="form-control" name="new_ord_cust_code" id="new_ord_cust_code" aria-labelledby="ord_cust_codelabel" />
+
+    <label id="ord_agent_codelabel">Agent code</label>
+    <input type="text" class="form-control" name="new_ord_agent_code" id="new_ord_agent_code" aria-labelledby="ord_agent_codelabel"  />
+
+    <label id="ord_descriptionlabel">Description</label>
+    <input type="text" class="form-control" size="60" name="new_ord_descriptor" id="new_ord_descriptor" aria-labelledby="ord_descriptionlabel" />
+
+    <button id="btn-add" class="btn">+</button>
+  </div>
+</div>
+
+<hr />
+
+<div id="modalInfo" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="dataInfo" class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table id="ordersTable" class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" id="table_ord_num"><button id="btn-sort-ord_num" class="btn">&uarr;</button><button id="btn-sort-ord_numI" class="btn">&darr;</button> Order number </th>
+            <th scope="col" id="table_ord_amount"><button id="btn-sort-ord_amount" class="btn">&uarr;</button><button id="btn-sort-ord_amountI" class="btn">&darr;</button> Quantity </th>
+            <th scope="col" id="table_advance_amount"><button id="btn-sort-advance_amount" class="btn">&uarr;</button><button id="btn-sort-advance_amountI" class="btn">&darr;</button> Advance </th>
+            <th scope="col" id="table_ord_date"><button id="btn-sort-ord_date" class="btn">&uarr;</button><button id="btn-sort-ord_dateI" class="btn">&darr;</button> Date </th>
+            <th scope="col" id="table_cust_code"><button id="btn-sort-cust_code" class="btn">&uarr;</button><button id="btn-sort-cust_codeI" class="btn">&darr;</button> Client code </th>
+            <th scope="col" id="table_agent_code"><button id="btn-sort-agent_code" class="btn">&uarr;</button><button id="btn-sort-agent_codeI" class="btn">&darr;</button> Agent code </th>
+            <th scope="col" id="table_ord_description"><button id="btn-sort-ord_description" class="btn">&uarr;</button><button id="btn-sort-ord_descriptionI" class="btn">&darr;</button> Description </th>
+    
+            <th scope="col" id="table_mod">Modify</th>
+            <th scope="col" id="table_del">Delete</th>
+            <th scope="col" id="table_info-customer">Client info</th>
+            <th scope="col" id="table_info-agent">Agent info</th>
+        </tr>
+    </thead>
+
+     <tbody>
+
+    </tbody>  
+
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% load static %}
+
+<script>
+    var ROLE = '{{ role }}';
+</script>
+
+<script src="{% static 'app/scripts/orderOrders.js' %}"></script>
+
+{% endblock %}
